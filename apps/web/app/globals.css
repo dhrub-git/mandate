@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@import "tailwindcss";
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   Design System: Organic Intelligence
+   Premium Fluidity Theme for Mandate
+   ============================================ */
+
+:root {
+  /* Custom Theme Colors */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  
+  /* Organic Intelligence Palette */
+  --cream: #fcfbf9;
+  --charcoal: #171717;
+  --indigo: #4338ca;
+  --indigo-light: #6366f1;
+  --indigo-dark: #3730a3;
+  --border-light: #e5e5e5;
+  
+  /* shadcn/ui Base Variables */
+  --radius: 0.75rem;
+  --background: oklch(0.995 0.002 90);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.398 0.195 277.366);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0.002 90);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0.002 90);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.97 0.002 90);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.002 90);
+  --input: oklch(0.9 0.002 90);
+  --ring: oklch(0.398 0.195 277.366);
+  --chart-1: oklch(0.398 0.195 277.366);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.55 0.195 277.366);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.22 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.25 0 0);
+  --ring: oklch(0.55 0.195 277.366);
+}
+
+/* Tailwind v4 Theme Configuration */
+@theme inline {
+  /* Border Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+  
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  
+  /* Custom Colors */
+  --color-cream: #fcfbf9;
+  --color-charcoal: #171717;
+  --color-indigo: #4338ca;
+  --color-indigo-light: #6366f1;
+  --color-indigo-dark: #3730a3;
+  
+  /* Font Families */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Custom Font Sizes */
+  --font-size-hero: clamp(3rem, 11vw, 10rem);
+  --font-size-hero-sm: clamp(2.5rem, 8vw, 6rem);
+  
+  /* Animation Timing */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  
+  /* Animations */
+  --animate-mesh-drift: mesh-drift 30s linear infinite;
+  --animate-btn-pulse: btn-pulse-anim 3s ease-in-out infinite;
+  --animate-status-pulse: status-pulse 2s ease-in-out infinite;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Heading Typography - Playfair Display */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply tracking-tight;
+  }
+
+  /* Functional/Labels - JetBrains Mono */
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  /* Premium Button */
+  .btn-premium {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-8 py-4;
+    @apply bg-primary text-primary-foreground font-mono text-xs uppercase tracking-[0.3em];
+    transition: all 0.5s var(--ease-premium);
+  }
+  
+  .btn-premium:hover {
+    @apply bg-indigo-light scale-[1.02];
+    box-shadow: 0 0 20px 0 rgba(67, 56, 202, 0.3);
+  }
+
+  /* Monospace Labels */
+  .mono-label {
+    font-family: var(--font-mono);
+    @apply uppercase text-xs font-medium;
+    letter-spacing: 0.3em;
+  }
+
+  /* Serif Italic Emphasis */
+  .serif-emphasis {
+    font-family: var(--font-serif);
+    @apply italic;
+  }
+
+  /* Mix Blend Difference Header */
+  .mix-blend-header {
+    mix-blend-mode: difference;
+    @apply text-white;
+  }
+
+  /* Wave Container */
+  .wave-container {
+    @apply absolute bottom-0 w-full overflow-hidden;
+    height: 25vh;
+  }
+
+  .wave-curve {
+    @apply absolute bg-cream;
+    width: 120%;
+    height: 200%;
+    border-radius: 50% 50% 0 0;
+    transform: translate(-10%, 20%);
+  }
+
+  /* Intelligent Card Hover */
+  .card-intelligent {
+    @apply overflow-hidden rounded-2xl;
+    transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
+  }
+
+  .card-intelligent:hover {
+    transform: scale(1.02) translateY(-1rem);
+    box-shadow: 0 25px 50px -12px rgba(67, 56, 202, 0.1);
+  }
+
+  .card-intelligent .card-bg {
+    transition: transform 0.5s var(--ease-premium);
+  }
+
+  .card-intelligent:hover .card-bg {
+    transform: scale(1.1);
+  }
+
+  .card-intelligent .action-pill {
+    @apply opacity-0 translate-y-4;
+    transition: all 0.5s var(--ease-premium);
+  }
+
+  .card-intelligent:hover .action-pill {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Button Pulse Animation */
+  .btn-pulse {
+    animation: btn-pulse-anim 3s ease-in-out infinite;
+  }
+
+  /* Underline Grow on Hover */
+  .underline-grow {
+    @apply relative;
+  }
+
+  .underline-grow::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-current;
+    transition: width 0.5s var(--ease-premium);
+  }
+
+  .underline-grow:hover::after {
+    @apply w-full;
+  }
+
+  /* Line Draw Animation */
+  .line-draw {
+    @apply h-px bg-border;
+    width: 0;
+    transition: width 0.8s var(--ease-premium);
+  }
+
+  .line-draw.visible {
+    width: 100%;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes mesh-drift {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes btn-pulse-anim {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(67, 56, 202, 0);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px 0 rgba(67, 56, 202, 0.3);
+  }
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-mesh {
+  animation: mesh-drift 30s linear infinite;
+}
+
+.status-online {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Background Mesh Gradient */
+.mesh-gradient {
+  @apply absolute inset-0 overflow-hidden;
+}
+
+.mesh-gradient::before,
+.mesh-gradient::after {
+  content: '';
+  @apply absolute rounded-full;
+  width: 80%;
+  height: 80%;
+  filter: blur(100px);
+  animation: mesh-drift 30s linear infinite;
+}
+
+.mesh-gradient::before {
+  background: rgba(199, 210, 254, 0.5);
+  top: -20%;
+  left: -20%;
+}
+
+.mesh-gradient::after {
+  background: rgba(233, 213, 255, 0.4);
+  bottom: -20%;
+  right: -20%;
+  animation-delay: -15s;
+}
+
+/* Footer Glow */
+.footer-glow {
+  background: radial-gradient(ellipse 50% 50% at 50% 0%, rgba(67, 56, 202, 0.15), transparent);
+}
