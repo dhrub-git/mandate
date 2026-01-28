@@ -309,10 +309,6 @@ describe('GeneratePage - Questionnaire Form', () => {
     })
 
     test('clears localStorage after successful submission', async () => {
-      // Mock window.location.href to prevent navigation during test
-      delete (window as any).location
-      window.location = { href: '' } as any
-      
       global.fetch = vi.fn(() => 
         Promise.resolve({
           ok: true,
@@ -334,20 +330,30 @@ describe('GeneratePage - Questionnaire Form', () => {
       fireEvent.click(screen.getByRole('button', { name: /next/i }))
       await screen.findByText('Page 3 of 3')
       
-      fireEvent.click(screen.getByRole('button', { name: /generate policy/i }))
+      // Mock window.location.href right before clicking generate to prevent navigation
+      const originalLocation = window.location
+      delete (window as any).location
+      window.location = { href: '' } as any
       
-      // localStorage should be cleared (or reset to initial state) after successful submission
-      await waitFor(() => {
-        const stored = localStorage.getItem('mandate-questionnaire')
-        // Either completely cleared (null) or reset to empty state
-        if (stored) {
-          const parsed = JSON.parse(stored)
-          // If stored, it should be empty state
-          expect(parsed.state.currentPage).toBe(0)
-          expect(parsed.state.answers).toEqual({})
-        }
-        // Either way, form should be reset
-      }, { timeout: 2000 })
+      try {
+        fireEvent.click(screen.getByRole('button', { name: /generate policy/i }))
+        
+        // localStorage should be cleared (or reset to initial state) after successful submission
+        await waitFor(() => {
+          const stored = localStorage.getItem('mandate-questionnaire')
+          // Either completely cleared (null) or reset to empty state
+          if (stored) {
+            const parsed = JSON.parse(stored)
+            // If stored, it should be empty state
+            expect(parsed.state.currentPage).toBe(0)
+            expect(parsed.state.answers).toEqual({})
+          }
+          // Either way, form should be reset
+        }, { timeout: 2000 })
+      } finally {
+        // Restore original window.location
+        window.location = originalLocation
+      }
     })
   })
 })
