@@ -10,20 +10,21 @@ describe('HomePage - Landing Page', () => {
   test('renders hero headline', () => {
     render(<HomePage />)
     
-    expect(screen.getByText(/generate your ai governance policy/i)).toBeInTheDocument()
+    const heading = screen.getByRole('heading', { name: /generate your policy in minutes/i })
+    expect(heading).toBeInTheDocument()
   })
 
-  test('renders "Generate My Policy" CTA button', () => {
+  test('renders "Initialize" CTA button', () => {
     render(<HomePage />)
     
-    const ctaButton = screen.getByRole('link', { name: /generate my policy/i })
+    const ctaButton = screen.getByRole('link', { name: /initialize/i })
     expect(ctaButton).toBeInTheDocument()
   })
 
   test('links to /generate on CTA click', () => {
     render(<HomePage />)
     
-    const ctaButton = screen.getByRole('link', { name: /generate my policy/i })
+    const ctaButton = screen.getByRole('link', { name: /initialize/i })
     expect(ctaButton).toHaveAttribute('href', '/generate')
   })
 
@@ -47,14 +48,15 @@ describe('HomePage - Landing Page', () => {
   test('includes GitHub link in nav', () => {
     render(<HomePage />)
     
-    const githubLink = screen.getByRole('link', { name: /github/i })
-    expect(githubLink).toHaveAttribute('href', expect.stringContaining('github.com'))
+    const githubLinks = screen.getAllByRole('link', { name: /github/i })
+    expect(githubLinks.length).toBeGreaterThan(0)
+    expect(githubLinks[0]).toHaveAttribute('href', expect.stringContaining('github.com'))
   })
 
   test('renders value proposition subheadline', () => {
     render(<HomePage />)
     
-    expect(screen.getByText(/tailored to australian regulations/i)).toBeInTheDocument()
+    expect(screen.getByText(/tailored to asic, apra, and privacy act/i)).toBeInTheDocument()
   })
 
   test('renders CTA in footer section', () => {

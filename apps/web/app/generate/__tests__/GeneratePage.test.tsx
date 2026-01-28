@@ -309,6 +309,10 @@ describe('GeneratePage - Questionnaire Form', () => {
     })
 
     test('clears localStorage after successful submission', async () => {
+      // Mock window.location.href to prevent navigation during test
+      delete (window as any).location
+      window.location = { href: '' } as any
+      
       global.fetch = vi.fn(() => 
         Promise.resolve({
           ok: true,
